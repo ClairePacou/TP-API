@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<title>Titre de la page</title>
+	<link rel="stylesheet" href="style.css">
+	<script >
+		/*$.ajax({
+			url: "https://api.openweathermap.org/data/2.5/weather?q=london",
+			data: {
+			},
+				success: function( result ) {
+					$( "#weather-temp" ).html( "<strong>" + result.main.temp + "</strong> degrees" );
+				}^=
+			});*/
+		//$( document ).ready(function() {
+			//$("#button").click(function(){
+				function appelmeteo(){
+				var resultat = $('#ville').val();
+				console.log(resultat);
+				$.ajax({url: "https://api.openweathermap.org/data/2.5/weather?q="+resultat+"&units=metric&appid=ce14f59ef22256ce94a446654259b29a", 
+					type : "GET",
+					dataType : "json",
+					success: function(result){
+					$("#oui").html("<strong>" + result.main.temp + "</strong> degrees");
+					console.log(result);
+				},
+				error: function(result){
+					console.log(result)
+				}
+			});
+			}
+		</script>
+	</head>
+	<body>
+		<p>
+			<label for="ville">La ville</label> : <input type="text" name="ville" id="ville" />
+			<p id="oui"></p><input type="button" value="valider"id="button" onclick="appelmeteo()" />
+		</p>
+	</body>
